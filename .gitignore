@@ -1,3 +1,7 @@
 RefCOCOg/*
 !RefCOCOg/data_processing.py
 
+SK-VG/*
+!SK-VG/data_processing.py
+
+*.zip
