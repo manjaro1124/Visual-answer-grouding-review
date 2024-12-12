@@ -24,10 +24,6 @@ def read_json(file_path, mode='test'):
         return raw_data['test'][:10]
 
 
-import cv2
-import numpy as np
-from PIL import Image
-
 def visualize_image(images, bbox):
     """
     可视化图像，并绘制 bbox。
@@ -61,7 +57,8 @@ def visualize_image(images, bbox):
     y_max = int(y_center + height / 2)
 
     # 绘制 bbox
-    cv2.rectangle(image, (x_min, y_min), (x_max, y_max), color=(0, 0, 255), thickness=2)
+    cv2.rectangle(image, (x_min, y_min), (x_max, y_max),
+                  color=(0, 0, 255), thickness=2)
 
     # 显示图像
     cv2.imshow("Image with BBox", image)
@@ -92,7 +89,7 @@ if __name__ == "__main__":
     images_dir = "SK-VG/sk-vg.v1/images"
     meta_data = build_meta_data(raw_data, images_dir)
     meta_data0 = meta_data[6]
-    image,bbox = meta_data0['image'],meta_data0['bbox']
-    print("knowledge:",meta_data0['knowledge'])
-    print("ref_exp:",meta_data0['ref_exp'])
-    visualize_image(image,bbox)
+    image, bbox = meta_data0['image'], meta_data0['bbox']
+    print("knowledge:", meta_data0['knowledge'])
+    print("ref_exp:", meta_data0['ref_exp'])
+    visualize_image(image, bbox)
