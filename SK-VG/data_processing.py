@@ -24,21 +24,21 @@ def read_json(file_path, mode='test'):
         return raw_data['test'][:10]
 
 
-def visualize_image(images, bbox):
+def visualize_image(image, bbox):
     """
     可视化图像，并绘制 bbox。
-    :param images: 图像（可以是字符串路径、Pillow 图像对象或 numpy 数组）
+    :param image: 图像（可以是字符串路径、Pillow 图像对象或 numpy 数组）
     :param bbox: 边界框（字典，格式为 {'x': 中心点 x, 'y': 中心点 y, 'width': 宽度, 'height': 高度}）
     """
     # 判断输入类型
-    if isinstance(images, str):
+    if isinstance(image, str):
         # 如果输入是字符串（文件路径），使用 OpenCV 读取图像
-        image = cv2.imread(images)
-    elif isinstance(images, Image.Image):
+        image = cv2.imread(image)
+    elif isinstance(image, Image.Image):
         # 如果输入是 Pillow 图像对象，转换为 OpenCV 格式
-        image = cv2.cvtColor(np.array(images), cv2.COLOR_RGB2BGR)
-    elif isinstance(images, np.ndarray):
-        image = images
+        image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+    elif isinstance(image, np.ndarray):
+        pass
     else:
         raise ValueError("输入必须是字符串（文件路径）、Pillow 图像对象或 numpy 数组")
 
@@ -70,12 +70,12 @@ def get_item_by_idx(meta_data, idx):
     return meta_data[idx]
 
 
-def build_meta_data(raw_data, images_dir):
+def build_meta_data(raw_data, image_dir):
     meta_data = []
     for _, data in enumerate(raw_data):
         each_data = {}
         image_name = data['image_name']
-        image_path = os.path.join(images_dir, image_name)
+        image_path = os.path.join(image_dir, image_name)
         each_data["knowledge"] = data['knowledge']
         each_data["ref_exp"] = data['ref_exp']
         each_data["bbox"] = data['bbox']
@@ -85,9 +85,9 @@ def build_meta_data(raw_data, images_dir):
 
 
 if __name__ == "__main__":
-    raw_data = read_json("SK-VG/sk-vg.v1/annotations.json")
-    images_dir = "SK-VG/sk-vg.v1/images"
-    meta_data = build_meta_data(raw_data, images_dir)
+    raw_data = read_json("SK-VG/data/annotations.json")
+    image_dir = "SK-VG/data/images"
+    meta_data = build_meta_data(raw_data, image_dir)
     meta_data0 = meta_data[6]
     image, bbox = meta_data0['image'], meta_data0['bbox']
     print("knowledge:", meta_data0['knowledge'])

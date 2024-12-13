@@ -1,7 +1,13 @@
+.vscode/
+
 RefCOCOg/data/*
 !RefCOCOg/data_processing.py
 
 SK-VG/data/*
 !SK-VG/data_processing.py
+
+Visual7W/data/*
+
+VizWiz_AnswerTherapy/data/*
 
 *.zip
